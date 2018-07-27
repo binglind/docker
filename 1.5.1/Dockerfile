@@ -15,15 +15,14 @@
 #  See the License for the specific language governing permissions and
 # limitations under the License.
 ###############################################################################
-
 FROM openjdk:8-jre-alpine
 
 # Install dependencies, bash and su-exec for easy step-down from root
 RUN apk add --no-cache bash libc6-compat snappy 'su-exec>=0.2'
 
 # Configure Flink version
-ENV FLINK_VERSION=1.5.1 \
-    HADOOP_SCALA_VARIANT=scala_2.11
+ENV FLINK_VERSION=1.5.0 \
+    HADOOP_SCALA_VARIANT=hadoop27-scala_2.11
 
 # Prepare environment
 ENV FLINK_HOME=/opt/flink
