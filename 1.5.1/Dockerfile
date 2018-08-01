@@ -16,7 +16,7 @@
 # limitations under the License.
 ###############################################################################
 
-FROM openjdk:8-jdk
+FROM openjdk:8-jdk-alpine
 
 # Install dependencies, bash and su-exec for easy step-down from root
 RUN apk add --no-cache bash libc6-compat snappy 'su-exec>=0.2'
