@@ -19,7 +19,8 @@
 FROM openjdk:8-jdk
 
 # Install dependencies, bash and su-exec for easy step-down from root
-RUN apk add --no-cache dstat  bash libc6-compat snappy 'su-exec>=0.2'
+RUN apk add --no-cache bash libc6-compat snappy 'su-exec>=0.2'
+RUN apk add dstat
 
 # Configure Flink version
 ENV FLINK_VERSION=1.5.1 \
