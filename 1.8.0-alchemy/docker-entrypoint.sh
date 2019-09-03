@@ -21,7 +21,6 @@
 ### If unspecified, the hostname of the container is taken as the JobManager address
 JOB_MANAGER_RPC_ADDRESS=${JOB_MANAGER_RPC_ADDRESS:-$(hostname -f)}
 FLINK_ADD_CONFIG=${FLINK_ADD_CONFIG}
-stringarray=($FLINK_ADD_CONFIG)
 drop_privs_cmd() {
     if [ -x /sbin/su-exec ]; then
         # Alpine
@@ -32,10 +31,15 @@ drop_privs_cmd() {
     fi
 }
 add_config(){
-        i=0
-        while [ $i -lt ${#stringarray[@]} ]
+       stringarray=$FLINK_ADD_CONFIG
+       OLD_IFS="$IFS"
+       IFS="|"
+       array=($stringarray)
+       IFS="$OLD_IFS"
+       i=0
+        while [ $i -lt ${#array[@]} ]
         do
-                echo "${stringarray[i]}: ${stringarray[i+1]}" >> "$FLINK_HOME/conf/flink-conf.yaml"
+                echo "${array[i]}: ${array[i+1]}" >> "$FLINK_HOME/conf/flink-conf.yaml"
                 let i=i+2
         done
 }
